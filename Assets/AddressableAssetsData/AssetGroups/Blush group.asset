@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Blush group
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Blush group
+  m_GUID: fcd21bec64c416b4c85bb8fd2f9fa9ba
+  m_SerializeEntries:
+  - m_GUID: 10766f85c0166ae4b8d33b6712aca254
+    m_Address: Blush/blush_color_08.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 203a0954c3308e440aa3290cdd17eb4a
+    m_Address: Blush/blush_color_03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a0605507582a964498fba61b521c002
+    m_Address: Blush/blush_color_01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 56bd1edf27679684cb0ee747a3a313cc
+    m_Address: Blush/blush_color_05.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9cb6e7a96c8807f4382d51292a12a160
+    m_Address: Blush/blush_color_04.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b44f9917941b00e4ca0f68dc68873531
+    m_Address: Blush/blush_color_02.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d51c95f4ba0b7be469494325036dd189
+    m_Address: Blush/blush_color_09.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3dcd86c52877a34b824c4e66a038348
+    m_Address: Blush/blush_color_07.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fde742b836cb56440a16f3d6bece4386
+    m_Address: Blush/blush_color_06.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4eeee0d8bac681047bc1ef5fb24eb319, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 3cef92d74ce1e1f43a2e854404cf7677, type: 2}
+    - {fileID: 11400000, guid: 9f5744d634b9ee640b4f70e3a0b80050, type: 2}
