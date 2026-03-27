@@ -12,7 +12,7 @@ public class Presenter : IService
         uiModel = ServiceLocator.Instance.Get<UIModel>();
         model = ServiceLocator.Instance.Get<Model>();
 
-        eventBus.instrumentReady += OnInstrumentReady;
+        //eventBus.instrumentReady += OnInstrumentReady;
         eventBus.blushInstrumentUsed += OnBlushInstrumentUsed;
     }
 
@@ -27,7 +27,7 @@ public class Presenter : IService
 
     public void OnColorSelected(int newColor)
     {
-        // Блокируем возможность выбора цвета
+        // Блокируем возможность выбора другого цвета
         uiModel.BlockInput();
         
         // Устанавливаем номер выбранного цвета
@@ -37,19 +37,26 @@ public class Presenter : IService
         // Выбираем номер инструмента, который будет наносить цвет
         if (uiModel.page == 2) 
         {
-            uiModel.SetInstrument(newColor);
+            uiModel.SetInstrument(newColor-1);
         }
         else
         {
             uiModel.SetInstrument(0);
         }
+
+        // TODO В случае с помадой нужно предусмотреть вариант смены цвета после GetReady
+
     }
 
-    private void OnInstrumentReady()
+    public void OnInstrumentReady()
     {
         // Разрешаем выбрать новый цвет или двигать инструмент
         uiModel.UnblockInput();
         uiModel.UnblockInstrumentInput();
+
+        // Меняем фазу на GetReady
+        uiModel.SetStage(1);
+        Debug.Log("Get Ready phase");
     }
 
     private void OnBlushInstrumentUsed()
@@ -58,37 +65,15 @@ public class Presenter : IService
         uiModel.BlockInstrumentInput();
     }
 
-    /*
-    private void OnInstrumentUsed()
+    public void OnCycleCompleted()
     {
-        switch (uiModel.mode)
-        {
-            case 0:
-                break;
-
-            case 1:
-                model.SetBlushColor(uiModel.color);
-                break;
-
-            case 2:
-                //model.SetLipstickColor(uiModel.color);
-                break;
-
-            case 3:
-                //model.SetEyeshadowsColor(uiModel.color);
-                break;
-
-            case 4:
-                //model.SetAcne(uiModel.color);
-                break;
-
-        }
+        uiModel.SetStage(0);
+        Debug.Log("Initial phase");
     }
-    */
 
     public void OnDispose()
     {
-        eventBus.instrumentReady -= OnInstrumentReady;
+        //eventBus.instrumentReady -= OnInstrumentReady;
     }
 
 }

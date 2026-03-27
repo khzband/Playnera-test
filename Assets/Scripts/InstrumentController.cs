@@ -62,7 +62,7 @@ public class InstrumentController : MonoBehaviour, IService
         }
 
         currentInstrument = instrumentObj.GetComponent<IInstrument>();
-        currentInstrument.GetReady(uiModel.color);
+        currentInstrument.GetReady();
     }
 
     private void OnInstrumentUsed()

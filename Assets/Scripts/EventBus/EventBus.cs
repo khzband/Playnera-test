@@ -8,7 +8,6 @@ public class EventBus : IService
 
     // Instruments
     public Action instrumentSelected;
-    public Action instrumentReady;
 
     // Blush
     public Action<int> blushColorSet;

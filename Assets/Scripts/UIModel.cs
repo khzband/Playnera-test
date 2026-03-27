@@ -7,7 +7,8 @@ public class UIModel : IService
     public int page;
     public int mode;
     public int color;
-    public int instrument;
+    public int instrument; // Номер интсрумента в соостветсвующем списке InstrumentController
+    public int stage; // 0 - начальный режим, 1 - фаза GetReady
 
     public bool inputBlocked;
     public bool instrumentBlocked;
@@ -20,6 +21,7 @@ public class UIModel : IService
         page = 1; // 0 - powder, 1 - blush, 2 - lipstick, 3 - eyeshadows
         mode = 1; // 0 - powder, 1 - blush, 2 - lipstick, 3 - eyeshadows, 4 - cream
         color = 0;
+        stage = 0;
 
         inputBlocked = false;
         instrumentBlocked = true;
@@ -38,6 +40,11 @@ public class UIModel : IService
     public void SetColor(int newColor)
     {
         color = newColor;
+    }
+
+    public void SetStage(int newStage)
+    {
+        stage = newStage;
     }
 
     public void SetInstrument(int newInstrument) 

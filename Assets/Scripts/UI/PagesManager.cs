@@ -22,15 +22,20 @@ public class PagesManager : MonoBehaviour, IService
 
     public void ShowPage(int page)
     {
-        // Прячем предыдущую страницу
-        pageObjects[currentPage].GetComponent<PageScript>().Hide();
+        if(uiModel.stage == 0 && !uiModel.inputBlocked)
+        {
+            // Прячем предыдущую страницу
+            pageObjects[currentPage].GetComponent<PageScript>().Hide();
 
-        // Открываем новую страницу и запоминаем её индекс
-        pageObjects[page].SetActive(true);
-        currentPage = page;
+            // Открываем новую страницу и запоминаем её индекс
+            pageObjects[page].SetActive(true);
+            currentPage = page;
 
-        // Отправляем выбранную страницу
-        presenter.OnPageSelected(page);
+            // Отправляем выбранную страницу
+            presenter.OnPageSelected(page);
+        }
+        
+        
     }
 
     public void ColorSelected(int color)

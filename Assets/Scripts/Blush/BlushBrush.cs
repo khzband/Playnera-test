@@ -5,6 +5,8 @@ using UnityEngine;
 public class BlushBrush : MonoBehaviour, IInstrument
 {
     EventBus eventBus;
+    UIModel uiModel;
+    Presenter presenter;
 
     public List<Transform> blushCells; // Список ячеек с румянами
     public RectTransform startZone;
@@ -19,13 +21,16 @@ public class BlushBrush : MonoBehaviour, IInstrument
     void Start()
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();
+        uiModel = ServiceLocator.Instance.Get<UIModel>();
+        presenter = ServiceLocator.Instance.Get<Presenter>();
+
         rectTransform = GetComponent<RectTransform>();
     }
 
     // Вызов начальной анимации, поступает с InstrumentController
-    public void GetReady(int color)
+    public void GetReady()
     {
-        StartCoroutine(GetReadySequence(color));
+        StartCoroutine(GetReadySequence(uiModel.color));
     }
 
 
@@ -38,7 +43,6 @@ public class BlushBrush : MonoBehaviour, IInstrument
         float moveTime = 0.2f;
         
         // Перемещаем к цвету
-        //yield return StartCoroutine(MoveRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, speed));
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, speed));
 
         // Анимация нанесения цвета на кисть
@@ -56,10 +60,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, readyZone.position, speed));
         
 
-        Debug.Log("Sequence completed");
-        
-
-        eventBus.instrumentReady?.Invoke();
+        presenter.OnInstrumentReady();
     }
 
     // Вызов анимации нанесения, поступает с InstrumentController
@@ -93,7 +94,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
         // Возвращаем кисть на место
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone.position, speed));
 
-
+        presenter.OnCycleCompleted();
     }
 
     /*
