@@ -137,5 +137,6 @@ public class BlushController : MonoBehaviour
     private void OnDisable()
     {
         eventBus.blushColorSet -= LoadBlushSprite;
+        eventBus.blushAnimationStarted -= BlushAnimation;
     }
 }
