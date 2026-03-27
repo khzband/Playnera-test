@@ -32,7 +32,8 @@ public class InstrumentController : MonoBehaviour, IService
         uiModel = ServiceLocator.Instance.Get<UIModel>();
 
         eventBus.instrumentSelected += OnInstrumentSelected;
-        eventBus.blushInstrumentUsed += OnInstrumentUsed;
+        eventBus.blushColorSet += OnInstrumentUsed;
+        eventBus.lipstickColorSet += OnInstrumentUsed;
     }
 
     
@@ -73,5 +74,7 @@ public class InstrumentController : MonoBehaviour, IService
     private void OnDisable()
     {
         eventBus.instrumentSelected -= OnInstrumentSelected;
+        eventBus.blushColorSet -= OnInstrumentUsed;
+        eventBus.lipstickColorSet -= OnInstrumentUsed;
     }
 }

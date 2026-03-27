@@ -32,8 +32,15 @@ public class Model : IService
     public void SetBlushColor(int newColor)
     {
         blushColor = newColor;
-        eventBus.blushColorSet?.Invoke(newColor);
+        eventBus.blushColorSet?.Invoke(); // BlushController начинает загружать спрайты, InstrumentController запускает анимацию нанесения
         Debug.Log($"New blush color = {newColor}");
+    }
+
+    public void SetLipstickColor(int newColor)
+    {
+        lipstickColor = newColor;
+        eventBus.lipstickColorSet?.Invoke(); // LipstickController начинает загружать спрайты, InstrumentController запускает анимацию нанесения
+        Debug.Log($"New lipstick color = {newColor}");
     }
 
 

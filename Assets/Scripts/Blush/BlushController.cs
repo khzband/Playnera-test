@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class BlushController : MonoBehaviour
 {
     EventBus eventBus;
+    Model model;
 
     public Image blushHolder1;
     public Image blushHolder2;
@@ -36,17 +37,18 @@ public class BlushController : MonoBehaviour
     void Start()
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();
+        model = ServiceLocator.Instance.Get<Model>();
 
-        eventBus.blushColorSet += ApplyBlushColor;
+        eventBus.blushColorSet += LoadBlushSprite;
         eventBus.blushAnimationStarted += BlushAnimation;
 
-        //LoadBlushAsync(0);
         Addressables.DownloadDependenciesAsync(blushFolder + blushImages[0]);
         activeHolder = 1;
     }
 
-    private void ApplyBlushColor(int color)
+    private void LoadBlushSprite()
     {
+        int color = model.blushColor;
         if (color > 0)
         {
             if (activeHolder == 1) 
@@ -134,6 +136,6 @@ public class BlushController : MonoBehaviour
 
     private void OnDisable()
     {
-        eventBus.blushColorSet -= ApplyBlushColor;
+        eventBus.blushColorSet -= LoadBlushSprite;
     }
 }

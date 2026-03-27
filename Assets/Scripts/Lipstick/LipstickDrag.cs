@@ -2,7 +2,7 @@ using System.Drawing;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LipstickDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class LipstickDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private UIModel uiModel;
     private EventBus eventBus;
@@ -24,22 +24,7 @@ public class LipstickDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
         lipstick = GetComponent<Lipstick>();
         rectTransform = GetComponent<RectTransform>();
-    }
-
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (eventData.button == PointerEventData.InputButton.Left)
-        {
-            //Debug.Log($"Lipstick {lipstick.id} selected");
-        }
-
-        if (!uiModel.inputBlocked)
-        {
-            int color = lipstick.id;
-            presenter.OnColorSelected(color);
-        }
-        Debug.Log($"Lipstick {lipstick.id} selected");
+        lipstickCollider = GetComponent<BoxCollider2D>();
     }
 
 
@@ -57,10 +42,10 @@ public class LipstickDrag : MonoBehaviour, IPointerDownHandler, IBeginDragHandle
 
     public void OnEndDrag(PointerEventData eventData)
     {
-
+        if (uiModel.instrument != lipstick.id - 1) return; // ≈сли эта помада не выбрана, ее нельз€ переместить
         if (lipstickCollider.IsTouching(faceZoneCollider))
         {
-            //eventBus.blushInstrumentUsed?.Invoke();
+            presenter.OnLipstickInstrumentUsed();
         }
 
     }

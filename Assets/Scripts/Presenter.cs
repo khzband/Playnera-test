@@ -13,7 +13,8 @@ public class Presenter : IService
         model = ServiceLocator.Instance.Get<Model>();
 
         //eventBus.instrumentReady += OnInstrumentReady;
-        eventBus.blushInstrumentUsed += OnBlushInstrumentUsed;
+        //eventBus.blushInstrumentUsed += OnBlushInstrumentUsed;
+        //eventBus.lipstickInstrumentUsed += OnLipstickInstrumentUsed;
     }
 
     // В UI выбран режим
@@ -46,6 +47,7 @@ public class Presenter : IService
 
         // TODO В случае с помадой нужно предусмотреть вариант смены цвета после GetReady
 
+
     }
 
     public void OnInstrumentReady()
@@ -59,9 +61,15 @@ public class Presenter : IService
         Debug.Log("Get Ready phase");
     }
 
-    private void OnBlushInstrumentUsed()
+    public void OnBlushInstrumentUsed()
     {
         model.SetBlushColor(uiModel.color);
+        uiModel.BlockInstrumentInput();
+    }
+
+    public void OnLipstickInstrumentUsed()
+    {
+        model.SetLipstickColor(uiModel.color);
         uiModel.BlockInstrumentInput();
     }
 

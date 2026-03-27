@@ -5,6 +5,7 @@ public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 {
     private UIModel uiModel;
     private EventBus eventBus;
+    private Presenter presenter;
 
     public BoxCollider2D brushCollider; // Коллайдер кисти
     public BoxCollider2D faceZoneCollider; // Коллайдер области лица
@@ -15,6 +16,7 @@ public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     {
         uiModel = ServiceLocator.Instance.Get<UIModel>();
         eventBus = ServiceLocator.Instance.Get<EventBus>();
+        presenter = ServiceLocator.Instance.Get<Presenter>();
 
         rectTransform = GetComponent<RectTransform>();
     }
@@ -35,7 +37,8 @@ public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
 
         if (brushCollider.IsTouching(faceZoneCollider))
         {
-            eventBus.blushInstrumentUsed?.Invoke();
+            //eventBus.blushInstrumentUsed?.Invoke();
+            presenter.OnBlushInstrumentUsed();
         }
         
     }
