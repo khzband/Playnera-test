@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class Utils
@@ -44,5 +45,49 @@ public class Utils
 
         // Финальная корректировка для точности
         objectToMove.position = targetPos;
+    }
+
+    public static IEnumerator FadeInRoutine(float duration, Image holder)
+    {
+        //holder.color = new Color(1, 1, 1, 0);
+        //holder.enabled = true;
+        Color color = holder.color;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            // Вычисляем альфу от 0 до 1
+            color.a = Mathf.Clamp01(elapsedTime / duration);
+            holder.color = color;
+
+            yield return null; // Ждем следующего кадра
+        }
+
+        // Гарантируем полную непрозрачность в конце
+        color.a = 1f;
+        holder.color = color;
+    }
+
+    public static IEnumerator FadeOutRoutine(float duration, Image holder)
+    {
+        Color color = holder.color;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+
+            // Вычисляем альфу от 0 до 1
+            color.a = Mathf.Clamp01(1f - elapsedTime / duration);
+            holder.color = color;
+
+            yield return null; // Ждем следующего кадра
+        }
+
+        // Гарантируем полную прозрачность в конце
+        color.a = 0f;
+        holder.color = color;
     }
 }

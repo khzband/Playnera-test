@@ -97,67 +97,28 @@ public class BlushController : MonoBehaviour
     {
         if(activeHolder == 1)
         {
-            StartCoroutine(FadeInRoutine(animationTime, blushHolder1));
+            StartCoroutine(StartFadeInRoutine(animationTime, blushHolder1));
             if(blushHolder2.sprite != null)
             {
-                StartCoroutine(FadeOutRoutine(animationTime, blushHolder2));
+                StartCoroutine(Utils.FadeOutRoutine(animationTime, blushHolder2));
             }
             
         }
         else
         {
-            StartCoroutine(FadeInRoutine(animationTime, blushHolder2));
-            StartCoroutine(FadeOutRoutine(animationTime, blushHolder1));
+            StartCoroutine(StartFadeInRoutine(animationTime, blushHolder2));
+            StartCoroutine(Utils.FadeOutRoutine(animationTime, blushHolder1));
         }
         
     }
 
-    IEnumerator FadeInRoutine(float duration, Image holder)
+    IEnumerator StartFadeInRoutine(float duration, Image holder)
     {
-        //holder.color = new Color(1, 1, 1, 0);
-        //holder.enabled = true;
-        Color color = holder.color;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-
-            // Вычисляем альфу от 0 до 1
-            color.a = Mathf.Clamp01(elapsedTime / duration);
-            holder.color = color;
-
-            yield return null; // Ждем следующего кадра
-        }
-
-        // Гарантируем полную непрозрачность в конце
-        color.a = 1f;
-        holder.color = color;
-
+        yield return StartCoroutine(Utils.FadeInRoutine(duration, holder));
         // Переключаем холдеры
         SwitchHolders();
     }
 
-    IEnumerator FadeOutRoutine(float duration, Image holder)
-    {
-        Color color = holder.color;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < duration)
-        {
-            elapsedTime += Time.deltaTime;
-
-            // Вычисляем альфу от 0 до 1
-            color.a = Mathf.Clamp01(1f - elapsedTime / duration);
-            holder.color = color;
-
-            yield return null; // Ждем следующего кадра
-        }
-
-        // Гарантируем полную прозрачность в конце
-        color.a = 0f;
-        holder.color = color;
-    }
 
     private void SwitchHolders()
     {
