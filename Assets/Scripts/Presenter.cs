@@ -17,7 +17,7 @@ public class Presenter : IService
         //eventBus.lipstickInstrumentUsed += OnLipstickInstrumentUsed;
     }
 
-    // В UI выбран режим
+    // В UI выбрана страница
     public void OnPageSelected(int page)
     {
         uiModel.SetPage(page);
@@ -26,6 +26,7 @@ public class Presenter : IService
         Debug.Log($"Page {page}, Mode {page}");
     }
 
+    // В UI выбран цвет
     public void OnColorSelected(int newColor)
     {
         // Блокируем возможность выбора другого цвета
@@ -36,7 +37,7 @@ public class Presenter : IService
         Debug.Log($"Color selected {newColor}");
         
         // Выбираем номер инструмента, который будет наносить цвет
-        if (uiModel.page == 2) 
+        if (uiModel.mode == 2) 
         {
             uiModel.SetInstrument(newColor-1);
         }
@@ -70,6 +71,12 @@ public class Presenter : IService
     public void OnLipstickInstrumentUsed()
     {
         model.SetLipstickColor(uiModel.color);
+        uiModel.BlockInstrumentInput();
+    }
+
+    public void OnEyeshadowsInstrumentUsed()
+    {
+        model.SetEyeshadowsColor(uiModel.color);
         uiModel.BlockInstrumentInput();
     }
 

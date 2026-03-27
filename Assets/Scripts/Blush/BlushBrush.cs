@@ -9,13 +9,14 @@ public class BlushBrush : MonoBehaviour, IInstrument
     Presenter presenter;
 
     public List<Transform> blushCells; // Список ячеек с румянами
-    public RectTransform startZone;
+    //public RectTransform startZone;
     public RectTransform readyZone;
     public RectTransform blushZone;
 
+    Vector3 startZone;
+
     private RectTransform rectTransform; // RectTransform кисти
 
-    //private float speed = 5f;
     private float speed = 700f;
 
     void Start()
@@ -25,6 +26,8 @@ public class BlushBrush : MonoBehaviour, IInstrument
         presenter = ServiceLocator.Instance.Get<Presenter>();
 
         rectTransform = GetComponent<RectTransform>();
+
+        startZone = rectTransform.position; // Запоминаем стартовую позицию
     }
 
     // Вызов начальной анимации, поступает с InstrumentController
@@ -92,7 +95,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
         yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushZone.position + offsetR, moveTime));
 
         // Возвращаем кисть на место
-        yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone.position, speed));
+        yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone, speed));
 
         presenter.OnCycleCompleted();
     }

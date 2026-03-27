@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Eyeshadows group
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Eyeshadows group
+  m_GUID: 14a40727bfa5e64498ba972d10593597
+  m_SerializeEntries:
+  - m_GUID: 0d128be95474d3f48b060990f22f5678
+    m_Address: Eyeshadows/eyeshadow_color_05.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 170dd52e36f5fb64f841ae4117cbcbf1
+    m_Address: Eyeshadows/eyeshadow_color_04.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2043d4818a54d824eb40db9e9ecbc648
+    m_Address: Eyeshadows/eyeshadow_color_09.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b0f7ccc8c0bb1743b7a0fb0e84b9a32
+    m_Address: Eyeshadows/eyeshadow_color_07.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a7cca25e609f524469526dbf5f6053ca
+    m_Address: Eyeshadows/eyeshadow_color_02.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d9b385e443f6a604381aef4c9aed8ecb
+    m_Address: Eyeshadows/eyeshadow_color_01.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: df87c7cca5f21044bbb3a38909059581
+    m_Address: Eyeshadows/eyeshadow_color_08.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: dffafaf629d71cf4aad77ec94f125bc4
+    m_Address: Eyeshadows/eyeshadow_color_06.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1f0ef140ec5a0d42849c39b521512ee
+    m_Address: Eyeshadows/eyeshadow_color_03.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4eeee0d8bac681047bc1ef5fb24eb319, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 5641288110fd3d44e9b1ef855c6876fc, type: 2}
+    - {fileID: 11400000, guid: ff200eb2014b909488749fdd5644982e, type: 2}

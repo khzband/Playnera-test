@@ -43,6 +43,11 @@ public class Model : IService
         Debug.Log($"New lipstick color = {newColor}");
     }
 
-
+    public void SetEyeshadowsColor(int newColor)
+    {
+        eyeshadowsColor = newColor;
+        eventBus.eyeshadowsColorSet?.Invoke(); // EyeshadowsController начинает загружать спрайты, InstrumentController запускает анимацию нанесения
+        Debug.Log($"New eyeshadows color = {newColor}");
+    }
 
 }

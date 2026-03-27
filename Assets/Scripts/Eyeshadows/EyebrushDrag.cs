@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class EyebrushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private UIModel uiModel;
-    private EventBus eventBus;
     private Presenter presenter;
 
-    public BoxCollider2D brushCollider; // Коллайдер кисти
+    private BoxCollider2D eyebrushCollider; // Собственный коллайдер кисти
     public BoxCollider2D faceZoneCollider; // Коллайдер области лица
 
     private RectTransform rectTransform;
@@ -15,15 +14,15 @@ public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     void Start()
     {
         uiModel = ServiceLocator.Instance.Get<UIModel>();
-        eventBus = ServiceLocator.Instance.Get<EventBus>();
         presenter = ServiceLocator.Instance.Get<Presenter>();
 
         rectTransform = GetComponent<RectTransform>();
+        eyebrushCollider = GetComponent<BoxCollider2D>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log("Brush drag begins");
+        //Debug.Log("Eyebrush drag begins");
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -35,10 +34,11 @@ public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     public void OnEndDrag(PointerEventData eventData)
     {
 
-        if (brushCollider.IsTouching(faceZoneCollider))
+        if (eyebrushCollider.IsTouching(faceZoneCollider))
         {
-            presenter.OnBlushInstrumentUsed();
+            presenter.OnEyeshadowsInstrumentUsed();
+            Debug.Log("Contact!");
         }
-        
+
     }
 }

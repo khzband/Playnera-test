@@ -30,7 +30,7 @@ public class LipstickDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log("Brush drag begins");
+        //Debug.Log("Lipstick drag begins");
     }
 
     public void OnDrag(PointerEventData eventData)
