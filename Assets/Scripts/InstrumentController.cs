@@ -32,7 +32,7 @@ public class InstrumentController : MonoBehaviour, IService
         uiModel = ServiceLocator.Instance.Get<UIModel>();
 
         eventBus.instrumentSelected += OnInstrumentSelected;
-
+        eventBus.blushInstrumentUsed += OnInstrumentUsed;
     }
 
     
@@ -63,6 +63,11 @@ public class InstrumentController : MonoBehaviour, IService
 
         currentInstrument = instrumentObj.GetComponent<IInstrument>();
         currentInstrument.GetReady(uiModel.color);
+    }
+
+    private void OnInstrumentUsed()
+    {
+        currentInstrument.ApplyInstrument();
     }
 
     private void OnDisable()

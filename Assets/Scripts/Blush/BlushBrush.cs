@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BlushBrush : MonoBehaviour, IInstrument
 {
@@ -22,14 +20,14 @@ public class BlushBrush : MonoBehaviour, IInstrument
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();
         rectTransform = GetComponent<RectTransform>();
-
-        eventBus.blushInstrumentUsed += ApplyBlush;
     }
 
+    // Вызов начальной анимации, поступает с InstrumentController
     public void GetReady(int color)
     {
         StartCoroutine(GetReadySequence(color));
     }
+
 
     /// <summary>
     /// Анимация нанесения цвета на кисть и перемещение в зону готовности
@@ -40,21 +38,22 @@ public class BlushBrush : MonoBehaviour, IInstrument
         float moveTime = 0.2f;
         
         // Перемещаем к цвету
-        yield return StartCoroutine(MoveRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, speed));
+        //yield return StartCoroutine(MoveRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, speed));
+        yield return StartCoroutine(Utils.MoveRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, speed));
 
-        
         // Анимация нанесения цвета на кисть
+        eventBus.brushTouchedColor?.Invoke(color);
         for (int i = 0; i < 2; i++)
         {
-            yield return StartCoroutine(MoveByTimeRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position + offset, moveTime));
-            yield return StartCoroutine(MoveByTimeRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, moveTime));
+            yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position + offset, moveTime));
+            yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, moveTime));
         }
 
-        yield return StartCoroutine(MoveByTimeRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position + offset, moveTime));
+        yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position + offset, moveTime));
 
         
         // Перемещение в зону готовности
-        yield return StartCoroutine(MoveRoutine(rectTransform, readyZone.position, speed));
+        yield return StartCoroutine(Utils.MoveRoutine(rectTransform, readyZone.position, speed));
         
 
         Debug.Log("Sequence completed");
@@ -63,37 +62,41 @@ public class BlushBrush : MonoBehaviour, IInstrument
         eventBus.instrumentReady?.Invoke();
     }
 
-    private void ApplyBlush()
+    // Вызов анимации нанесения, поступает с InstrumentController
+    public void ApplyInstrument()
     {
-        StartCoroutine(ApplyBlushRoutine());
+        StartCoroutine(ApplyBlushSequence());
     }
 
-
-    IEnumerator ApplyBlushRoutine()
+    /// <summary>
+    /// Анимация использования на кукле и возврат в начальное местоположение
+    /// </summary>
+    IEnumerator ApplyBlushSequence()
     {
         Vector3 offsetL = new Vector3(-100, 0, 0);
         Vector3 offsetR = new Vector3(100, 0, 0);
         float moveTime = 0.3f;
 
         // Перемещаем к начальной точке
-        yield return StartCoroutine(MoveRoutine(rectTransform, blushZone.position + offsetL, speed));
+        yield return StartCoroutine(Utils.MoveRoutine(rectTransform, blushZone.position + offsetL, speed));
 
         
         // Анимация нанесения цвета на лицо
         eventBus.blushAnimationStarted?.Invoke();
         for (int i = 0; i < 2; i++)
         {
-            yield return StartCoroutine(MoveByTimeRoutine(rectTransform, blushZone.position + offsetR, moveTime));
-            yield return StartCoroutine(MoveByTimeRoutine(rectTransform, blushZone.position + offsetL, moveTime));
+            yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushZone.position + offsetR, moveTime));
+            yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushZone.position + offsetL, moveTime));
         }
-        yield return StartCoroutine(MoveByTimeRoutine(rectTransform, blushZone.position + offsetR, moveTime));
+        yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushZone.position + offsetR, moveTime));
 
         // Возвращаем кисть на место
-        yield return StartCoroutine(MoveRoutine(rectTransform, startZone.position, speed));
+        yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone.position, speed));
 
 
     }
 
+    /*
     /// <summary>
     /// Рутина перемещения объекта в заданную точку
     /// </summary>
@@ -133,7 +136,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
         // Финальная корректировка для точности
         objectToMove.position = targetPos;
     }
-
+    */
 
 
 }

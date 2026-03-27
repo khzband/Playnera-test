@@ -36,4 +36,6 @@ public class Model : IService
         Debug.Log($"New blush color = {newColor}");
     }
 
+
+
 }

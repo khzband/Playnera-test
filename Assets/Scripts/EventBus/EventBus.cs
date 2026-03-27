@@ -6,13 +6,14 @@ public class EventBus : IService
     //Application
 
 
-    // UI
+    // Instruments
     public Action instrumentSelected;
     public Action instrumentReady;
-    public Action blushInstrumentUsed;
 
-    // Model
+    // Blush
     public Action<int> blushColorSet;
+    public Action<int> brushTouchedColor;
+    public Action blushInstrumentUsed;
     public Action blushAnimationStarted;
 
 }
