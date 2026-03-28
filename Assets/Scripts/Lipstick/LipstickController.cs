@@ -16,6 +16,7 @@ public class LipstickController : MonoBehaviour
     int activeHolder;
 
     float animationTime = 1.5f;
+    float removeTime = 0.5f;
 
     private AsyncOperationHandle lipstickHandle;
 
@@ -39,6 +40,7 @@ public class LipstickController : MonoBehaviour
 
         eventBus.lipstickColorSet += LoadLipstickSprite;
         eventBus.lipstickAnimationStarted += LipstickAnimation;
+        eventBus.lipstickRemoved += RemoveLipstick;
 
         //Addressables.DownloadDependenciesAsync(lipstickFolder + lipstickImages[0]);
         activeHolder = 1;
@@ -131,9 +133,31 @@ public class LipstickController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void RemoveLipstick()
+    {
+        // Здесь номера холдеров наоборот, потому что процедура в конце ставит номер холдера для следующего использования 
+        if (activeHolder == 1)
+        {
+            StartCoroutine(RemoveRoutine(removeTime, lipstickHolder2));
+        }
+        else
+        {
+            StartCoroutine(RemoveRoutine(removeTime, lipstickHolder1));
+        }
+    }
+
+    IEnumerator RemoveRoutine(float time, Image holder)
+    {
+        yield return StartCoroutine(Utils.FadeOutRoutine(time, holder));
+
+        activeHolder = 1;
+        lipstickHolder2.sprite = null;
+    }
+
+    private void OnDestroy()
     {
         eventBus.lipstickColorSet -= LoadLipstickSprite;
         eventBus.lipstickAnimationStarted -= LipstickAnimation;
+        eventBus.lipstickRemoved -= RemoveLipstick;
     }
 }

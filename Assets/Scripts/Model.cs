@@ -6,6 +6,7 @@ public class Model : IService
     EventBus eventBus;
     
     public bool acne;
+    public bool acneAlreadyRemoved;
     public int blushColor;
     public int lipstickColor;
     public int eyeshadowsColor;
@@ -24,6 +25,7 @@ public class Model : IService
         eventBus = ServiceLocator.Instance.Get<EventBus>();
         
         acne = true;
+        acneAlreadyRemoved = false;
         blushColor = 0;
         lipstickColor = 0;
         eyeshadowsColor = 0;
@@ -48,6 +50,36 @@ public class Model : IService
         eyeshadowsColor = newColor;
         eventBus.eyeshadowsColorSet?.Invoke(); // EyeshadowsController начинает загружать спрайты, InstrumentController запускает анимацию нанесения
         Debug.Log($"New eyeshadows color = {newColor}");
+    }
+
+    public void SetAcne(bool value)
+    {
+        acne = value;
+        eventBus.acneSet?.Invoke();// InstrumentController запускает анимацию нанесения
+    }
+
+    public void RemoveBlush()
+    {
+        blushColor = 0;
+        eventBus.blushRemoved?.Invoke();
+    }
+
+    public void RemoveLipstick()
+    {
+        lipstickColor = 0;
+        eventBus.lipstickRemoved?.Invoke();
+    }
+
+    public void RemoveEyeshadows()
+    {
+        eyeshadowsColor = 0;
+        eventBus.eyeshadowsRemoved?.Invoke();
+    }
+
+    public void RemoveCream()
+    {
+        acne = true;
+        eventBus.creamRemoved?.Invoke();
     }
 
 }

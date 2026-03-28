@@ -6,10 +6,11 @@ public class InstrumentController : MonoBehaviour, IService
     EventBus eventBus;
     UIModel uiModel;
 
-    public List<GameObject> powderInstruments;
-    public List<GameObject> blushInstruments;
+    //public GameObject powderInstrument;
+    public GameObject blushInstrument;
     public List<GameObject> lipstickInstruments;
-    public List<GameObject> eyeshadowsInstruments;
+    public GameObject eyeshadowsInstrument;
+    public GameObject creamInstrument;
 
     //List <List<GameObject>> instrList;
 
@@ -35,20 +36,21 @@ public class InstrumentController : MonoBehaviour, IService
         eventBus.blushColorSet += OnInstrumentUsed;
         eventBus.lipstickColorSet += OnInstrumentUsed;
         eventBus.eyeshadowsColorSet += OnInstrumentUsed;
+        eventBus.acneSet += OnInstrumentUsed;
     }
 
     
 
     private void OnInstrumentSelected()
     {
-        switch (uiModel.page)
+        switch (uiModel.mode)
         {
             case 0:
                  break;
                 
                 
             case 1:
-                instrumentObj = blushInstruments[uiModel.instrument];
+                instrumentObj = blushInstrument;
                 break;
                 
                 
@@ -58,9 +60,14 @@ public class InstrumentController : MonoBehaviour, IService
                 
                 
             case 3:
-                instrumentObj = eyeshadowsInstruments[uiModel.instrument];
+                instrumentObj = eyeshadowsInstrument;
                 break;
                 
+            case 4:
+                instrumentObj = creamInstrument;
+                break;
+
+
         }
 
         currentInstrument = instrumentObj.GetComponent<IInstrument>();
@@ -72,11 +79,12 @@ public class InstrumentController : MonoBehaviour, IService
         currentInstrument.ApplyInstrument();
     }
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         eventBus.instrumentSelected -= OnInstrumentSelected;
         eventBus.blushColorSet -= OnInstrumentUsed;
         eventBus.lipstickColorSet -= OnInstrumentUsed;
         eventBus.eyeshadowsColorSet -= OnInstrumentUsed;
+        eventBus.acneSet -= OnInstrumentUsed;
     }
 }

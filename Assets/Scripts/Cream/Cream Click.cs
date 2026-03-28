@@ -1,30 +1,27 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LipstickClick : MonoBehaviour, IPointerClickHandler
+public class CreamClick : MonoBehaviour, IPointerClickHandler
 {
     private UIModel uiModel;
     private Presenter presenter;
 
-    public GameObject lipstickObj;
-    private Lipstick lipstick;
 
     void Start()
     {
         uiModel = ServiceLocator.Instance.Get<UIModel>();
         presenter = ServiceLocator.Instance.Get<Presenter>();
 
-        lipstick = lipstickObj.GetComponent<Lipstick>();
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        Debug.Log("Cream selected");
+
         if (!uiModel.inputBlocked && uiModel.stage == 0)
         {
-            int color = lipstick.id;
-            presenter.OnColorSelected(color);
-            Debug.Log($"Lipstick {lipstick.id} selected");
+            presenter.OnCreamSelected();
+            Debug.Log("Cream selected");
         }
     }
-
 }

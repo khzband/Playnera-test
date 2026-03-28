@@ -16,6 +16,7 @@ public class EyeshadowsController : MonoBehaviour
     int activeHolder;
 
     float animationTime = 1.5f;
+    float removeTime = 0.5f;
 
     private AsyncOperationHandle eyeshadowsHandle;
 
@@ -41,6 +42,7 @@ public class EyeshadowsController : MonoBehaviour
 
         eventBus.eyeshadowsColorSet += LoadEyeshadowsSprite;
         eventBus.eyeshadowsAnimationStarted += EyeshadowsAnimation;
+        eventBus.eyeshadowsRemoved += RemoveEyeshadows;
 
         //Addressables.DownloadDependenciesAsync(eyeshadowsFolder + eyeshadowsImages[0]);
         activeHolder = 1;
@@ -136,10 +138,32 @@ public class EyeshadowsController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void RemoveEyeshadows()
+    {
+        // Здесь номера холдеров наоборот, потому что процедура в конце ставит номер холдера для следующего использования 
+        if (activeHolder == 1)
+        {
+            StartCoroutine(RemoveRoutine(removeTime, eyeshadowsHolder2));
+        }
+        else
+        {
+            StartCoroutine(RemoveRoutine(removeTime, eyeshadowsHolder1));
+        }
+    }
+
+    IEnumerator RemoveRoutine(float time, Image holder)
+    {
+        yield return StartCoroutine(Utils.FadeOutRoutine(time, holder));
+
+        activeHolder = 1;
+        eyeshadowsHolder2.sprite = null;
+    }
+
+    private void OnDestroy()
     {
         eventBus.eyeshadowsColorSet -= LoadEyeshadowsSprite;
         eventBus.eyeshadowsAnimationStarted -= EyeshadowsAnimation;
+        eventBus.eyeshadowsRemoved -= RemoveEyeshadows;
     }
 
 }

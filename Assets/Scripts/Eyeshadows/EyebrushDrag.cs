@@ -27,7 +27,7 @@ public class EyebrushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (uiModel.instrumentBlocked) return;
+        if (uiModel.instrumentBlocked || uiModel.mode != 3) return;
         rectTransform.anchoredPosition += eventData.delta;
     }
 

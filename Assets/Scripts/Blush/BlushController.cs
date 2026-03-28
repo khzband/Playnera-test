@@ -16,6 +16,7 @@ public class BlushController : MonoBehaviour
     int activeHolder;
 
     float animationTime = 1.5f;
+    float removeTime = 0.5f;
 
     private AsyncOperationHandle blushHandle;
 
@@ -41,6 +42,7 @@ public class BlushController : MonoBehaviour
 
         eventBus.blushColorSet += LoadBlushSprite;
         eventBus.blushAnimationStarted += BlushAnimation;
+        eventBus.blushRemoved += RemoveBlush;
 
         Addressables.DownloadDependenciesAsync(blushFolder + blushImages[0]); // Shaders prewarm
         activeHolder = 1;
@@ -134,9 +136,33 @@ public class BlushController : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    private void RemoveBlush()
+    {
+        // Здесь номера холдеров наоборот, потому что процедура в конце ставит номер холдера для следующего использования 
+        if(activeHolder == 1)
+        {
+            StartCoroutine(RemoveRoutine(removeTime, blushHolder2));
+        }
+        else
+        {
+            StartCoroutine(RemoveRoutine(removeTime, blushHolder1));
+        }
+    }
+
+    IEnumerator RemoveRoutine(float time, Image holder)
+    {
+        yield return StartCoroutine(Utils.FadeOutRoutine(time, holder));
+
+        activeHolder = 1;
+        blushHolder2.sprite = null;
+    }
+
+
+    private void OnDestroy()
     {
         eventBus.blushColorSet -= LoadBlushSprite;
         eventBus.blushAnimationStarted -= BlushAnimation;
+        eventBus.blushRemoved -= RemoveBlush;
     }
+
 }

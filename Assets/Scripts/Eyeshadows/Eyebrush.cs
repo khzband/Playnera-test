@@ -18,7 +18,7 @@ public class Eyebrush : MonoBehaviour, IInstrument
 
     private float speed = 700f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();

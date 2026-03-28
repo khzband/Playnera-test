@@ -3,9 +3,7 @@ using UnityEngine;
 
 public class EventBus : IService
 {
-    //Application
-
-
+    
     // Instruments
     public Action instrumentSelected;
 
@@ -22,5 +20,17 @@ public class EventBus : IService
     public Action eyeshadowsColorSet;
     public Action<int> eyebrushTouchedColor;
     public Action eyeshadowsAnimationStarted;
+
+    // Cream
+    public Action acneSet;
+    public Action acneAnimationStarted;
+
+    // Remove makeup
+    public Action blushRemoved;
+    public Action lipstickRemoved;
+    public Action eyeshadowsRemoved;
+    public Action creamRemoved;
+
+
 
 }

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Presenter : IService
@@ -21,17 +22,23 @@ public class Presenter : IService
     public void OnPageSelected(int page)
     {
         uiModel.SetPage(page);
-        uiModel.SetMode(page);
+        //uiModel.SetMode(page);
 
-        Debug.Log($"Page {page}, Mode {page}");
+        Debug.Log($"Page {page}");
     }
 
     // В UI выбран цвет
     public void OnColorSelected(int newColor)
     {
+        // Если выбран крем, то в фазе GetReady нельзя выбрать цвет в книге
+        if (uiModel.stage == 1 && uiModel.mode == 4) return;
+
         // Блокируем возможность выбора другого цвета
-        uiModel.BlockInput();
-        
+        //uiModel.BlockInput();
+
+        // Устанавливаем режим
+        uiModel.SetMode(uiModel.page);
+
         // Устанавливаем номер выбранного цвета
         uiModel.SetColor(newColor);
         Debug.Log($"Color selected {newColor}");
@@ -49,6 +56,21 @@ public class Presenter : IService
         // TODO В случае с помадой нужно предусмотреть вариант смены цвета после GetReady
 
 
+    }
+
+    public void OnCreamSelected()
+    {
+        // Блокируем возможность выбора цветов в книге
+        //uiModel.BlockInput();
+
+        // Устанавливаем режим крема
+        uiModel.SetMode(4);
+
+        // У этого инструмента только один цвет
+        uiModel.SetColor(0);
+
+        // и только один инструмент
+        uiModel.SetInstrument(0);
     }
 
     public void OnInstrumentReady()
@@ -79,6 +101,42 @@ public class Presenter : IService
         model.SetEyeshadowsColor(uiModel.color);
         uiModel.BlockInstrumentInput();
     }
+
+    public void OnCreamInstrumentUsed()
+    {
+        model.SetAcne(false);
+        uiModel.BlockInstrumentInput();
+    }
+
+    public void OnAcneRemoved()
+    {
+        model.acneAlreadyRemoved = true;
+    }
+
+    public void OnSpongeClicked()
+    {
+        if(model.blushColor > 0)
+        {
+            model.RemoveBlush();
+        }
+
+        if (model.lipstickColor > 0)
+        {
+            model.RemoveLipstick();
+        }
+
+        if (model.eyeshadowsColor > 0)
+        {
+            model.RemoveEyeshadows();
+        }
+
+        if (!model.acne)
+        {
+            model.RemoveCream();
+            model.acneAlreadyRemoved = false;
+        }
+    }
+
 
     public void OnCycleCompleted()
     {
