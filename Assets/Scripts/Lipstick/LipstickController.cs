@@ -40,7 +40,7 @@ public class LipstickController : MonoBehaviour
         eventBus.lipstickColorSet += LoadLipstickSprite;
         eventBus.lipstickAnimationStarted += LipstickAnimation;
 
-        Addressables.DownloadDependenciesAsync(lipstickFolder + lipstickImages[0]);
+        //Addressables.DownloadDependenciesAsync(lipstickFolder + lipstickImages[0]);
         activeHolder = 1;
     }
 

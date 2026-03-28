@@ -34,6 +34,7 @@ public class InstrumentController : MonoBehaviour, IService
         eventBus.instrumentSelected += OnInstrumentSelected;
         eventBus.blushColorSet += OnInstrumentUsed;
         eventBus.lipstickColorSet += OnInstrumentUsed;
+        eventBus.eyeshadowsColorSet += OnInstrumentUsed;
     }
 
     
@@ -76,5 +77,6 @@ public class InstrumentController : MonoBehaviour, IService
         eventBus.instrumentSelected -= OnInstrumentSelected;
         eventBus.blushColorSet -= OnInstrumentUsed;
         eventBus.lipstickColorSet -= OnInstrumentUsed;
+        eventBus.eyeshadowsColorSet -= OnInstrumentUsed;
     }
 }

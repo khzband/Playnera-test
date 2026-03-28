@@ -37,7 +37,6 @@ public class EyebrushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         if (eyebrushCollider.IsTouching(faceZoneCollider))
         {
             presenter.OnEyeshadowsInstrumentUsed();
-            Debug.Log("Contact!");
         }
 
     }

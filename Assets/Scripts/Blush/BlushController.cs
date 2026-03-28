@@ -42,7 +42,7 @@ public class BlushController : MonoBehaviour
         eventBus.blushColorSet += LoadBlushSprite;
         eventBus.blushAnimationStarted += BlushAnimation;
 
-        Addressables.DownloadDependenciesAsync(blushFolder + blushImages[0]);
+        Addressables.DownloadDependenciesAsync(blushFolder + blushImages[0]); // Shaders prewarm
         activeHolder = 1;
     }
 
