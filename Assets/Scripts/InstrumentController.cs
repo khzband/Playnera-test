@@ -51,6 +51,11 @@ public class InstrumentController : MonoBehaviour, IService
                 
             case 1:
                 instrumentObj = blushInstrument;
+                eventBus.blushColorSelected?.Invoke();
+                if (uiModel.quickColorReset)
+                {
+                    eventBus.blushColorReset?.Invoke();
+                }
                 break;
                 
                 

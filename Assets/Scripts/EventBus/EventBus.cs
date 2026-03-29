@@ -8,8 +8,10 @@ public class EventBus : IService
     public Action instrumentSelected;
 
     // Blush
+    public Action blushColorSelected; // Сигнал для загрузки окрашенного кончика кисти
+    public Action blushColorReset; // Быстрое освобождение от предыдущего цвета
     public Action blushColorSet;
-    public Action<int> brushTouchedColor;
+    public Action brushTouchedColor;
     public Action blushAnimationStarted;
 
     // Lipstick
@@ -18,7 +20,7 @@ public class EventBus : IService
 
     // Eyebrush
     public Action eyeshadowsColorSet;
-    public Action<int> eyebrushTouchedColor;
+    public Action eyebrushTouchedColor;
     public Action eyeshadowsAnimationStarted;
 
     // Cream

@@ -49,7 +49,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, speed));
 
         // Анимация нанесения цвета на кисть
-        eventBus.brushTouchedColor?.Invoke(color);
+        eventBus.brushTouchedColor?.Invoke();
         for (int i = 0; i < 2; i++)
         {
             yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position + offset, moveTime));

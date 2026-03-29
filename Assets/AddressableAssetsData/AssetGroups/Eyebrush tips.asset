@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Eyebrush tips
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Eyebrush tips
+  m_GUID: 42acf3dd71f68264c814cd806d47f8a6
+  m_SerializeEntries:
+  - m_GUID: 0cd3496d5e9171f438e15f6c8b099baf
+    m_Address: Eyebrush tips/eyebrush_tip_color_5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 513e6c0968262434caf9928fdac27b59
+    m_Address: Eyebrush tips/eyebrush_tip_color_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 73a45eae4e3627b45a2d2d656766582f
+    m_Address: Eyebrush tips/eyebrush_tip_color_6.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a1ac73415b15a504783893d39da4a7be
+    m_Address: Eyebrush tips/eyebrush_tip_color_4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a69eaa55a2c87c74b848aa406287ca27
+    m_Address: Eyebrush tips/eyebrush_tip_color_3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b30f3fd7e52b8ef4c9688dd9e924a168
+    m_Address: Eyebrush tips/eyebrush_tip_color_8.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b8f3cee22e7fd6341825580c97ce6ee5
+    m_Address: Eyebrush tips/eyebrush_tip_color_7.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bc237fe3a5da1bd479b288f1f45a9502
+    m_Address: Eyebrush tips/eyebrush_tip_color_9.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c73d9f4bcb810a54d9f0e0dae12b02a7
+    m_Address: Eyebrush tips/eyebrush_tip_color_2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4eeee0d8bac681047bc1ef5fb24eb319, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: e02084b1ed8a3ba4983e61df1804d79b, type: 2}
+    - {fileID: 11400000, guid: c748ca84937f5a044b90a3fc1ebe510a, type: 2}

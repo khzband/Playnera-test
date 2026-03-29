@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class BlushDrag : MonoBehaviour, IDragHandler, IEndDragHandler
 {
     private UIModel uiModel;
     private EventBus eventBus;
     private Presenter presenter;
 
-    public BoxCollider2D brushCollider; // Коллайдер кисти
+    private BoxCollider2D brushCollider; // Коллайдер кисти
     public BoxCollider2D faceZoneCollider; // Коллайдер области лица
 
     private RectTransform rectTransform;
@@ -19,12 +19,15 @@ public class BlushDrag : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
         presenter = ServiceLocator.Instance.Get<Presenter>();
 
         rectTransform = GetComponent<RectTransform>();
+        brushCollider = GetComponent<BoxCollider2D>();
     }
 
+    /*
     public void OnBeginDrag(PointerEventData eventData)
     {
         //Debug.Log("Brush drag begins");
     }
+    */
 
     public void OnDrag(PointerEventData eventData)
     {

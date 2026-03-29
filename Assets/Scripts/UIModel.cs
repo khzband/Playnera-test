@@ -12,6 +12,7 @@ public class UIModel : IService
 
     public bool inputBlocked;
     public bool instrumentBlocked;
+    public bool quickColorReset;
 
     public void Init()
     {
@@ -25,6 +26,7 @@ public class UIModel : IService
 
         inputBlocked = false;
         instrumentBlocked = true;
+        quickColorReset = false;
     }
 
     public void SetPage(int pageValue)

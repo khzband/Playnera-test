@@ -33,8 +33,11 @@ public class Presenter : IService
         // Если выбран крем, то в фазе GetReady нельзя выбрать цвет в книге
         if (uiModel.stage == 1 && uiModel.mode == 4) return;
 
-        // Блокируем возможность выбора другого цвета
-        //uiModel.BlockInput();
+        // Проверка на смену цвета в фазе GetReady
+        if(uiModel.stage == 1)
+        {
+            uiModel.quickColorReset = true;
+        }
 
         // Устанавливаем режим
         uiModel.SetMode(uiModel.page);
@@ -53,16 +56,11 @@ public class Presenter : IService
             uiModel.SetInstrument(0);
         }
 
-        // TODO В случае с помадой нужно предусмотреть вариант смены цвета после GetReady
-
 
     }
 
     public void OnCreamSelected()
     {
-        // Блокируем возможность выбора цветов в книге
-        //uiModel.BlockInput();
-
         // Устанавливаем режим крема
         uiModel.SetMode(4);
 
@@ -141,10 +139,11 @@ public class Presenter : IService
     public void OnCycleCompleted()
     {
         uiModel.SetStage(0);
+        uiModel.quickColorReset = false;
         Debug.Log("Initial phase");
     }
 
-    public void OnDispose()
+    public void OnDestroy()
     {
         //eventBus.instrumentReady -= OnInstrumentReady;
     }

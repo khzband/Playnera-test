@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Brush tips
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Brush tips
+  m_GUID: 324c6eb6fe0ed934f971672f845f5bdc
+  m_SerializeEntries:
+  - m_GUID: 09679232a6293f140b39bc0a63334850
+    m_Address: Brush tips/blush_tip_color_4.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15c0eff0be3a91f4488690be86b12a43
+    m_Address: Brush tips/blush_tip_color_9.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a190c9140f81d74b8a84afcde412061
+    m_Address: Brush tips/blush_tip_color_5.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 393c019bb529da84a9689bb6a23443ea
+    m_Address: Brush tips/blush_tip_color_2.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4bfa3f21464999945a5e5347772bc095
+    m_Address: Brush tips/blush_tip_color_3.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5ecd0fc1c16709e4a9c2fe95bdd56b84
+    m_Address: Brush tips/blush_tip_color_8.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 802e00b31d23dbf419f39d26aff7ad45
+    m_Address: Brush tips/blush_tip_color_6.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 888789dc9abe74d44840242888472333
+    m_Address: Brush tips/blush_tip_color_1.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f110120d11e279140a9559af041bd4fe
+    m_Address: Brush tips/blush_tip_color_7.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 4eeee0d8bac681047bc1ef5fb24eb319, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 680d31be763ba054bb3fd8b7806e87f6, type: 2}
+    - {fileID: 11400000, guid: 991422d157210fd42b7854ce2f7a8bea, type: 2}

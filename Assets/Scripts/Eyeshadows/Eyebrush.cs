@@ -49,7 +49,7 @@ public class Eyebrush : MonoBehaviour, IInstrument
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, eyeshadowsCells[color - 1].GetComponent<RectTransform>().position, speed));
 
         // Анимация нанесения цвета на кисть
-        eventBus.eyebrushTouchedColor?.Invoke(color);
+        eventBus.eyebrushTouchedColor?.Invoke();
         for (int i = 0; i < 2; i++)
         {
             yield return StartCoroutine(Utils.MoveByTimeRoutine(rectTransform, eyeshadowsCells[color - 1].GetComponent<RectTransform>().position + offset, moveTime));
