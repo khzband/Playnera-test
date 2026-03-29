@@ -18,7 +18,8 @@ public class BlushController : MonoBehaviour
     float animationTime = 1.5f;
     float removeTime = 0.5f;
 
-    private AsyncOperationHandle blushHandle;
+    private AsyncOperationHandle blushHandle1;
+    private AsyncOperationHandle blushHandle2;
 
     private string blushFolder = "Blush/";
     private List<string> blushImages = new List<string>()
@@ -55,11 +56,11 @@ public class BlushController : MonoBehaviour
         {
             if (activeHolder == 1) 
             {
-                LoadBlushAsync(color - 1, blushHolder1);
+                LoadBlushAsync(color - 1, blushHolder1, blushHandle1);
             }
             else
             {
-                LoadBlushAsync(color - 1, blushHolder2);
+                LoadBlushAsync(color - 1, blushHolder2, blushHandle2);
             }
             
         }
@@ -77,16 +78,16 @@ public class BlushController : MonoBehaviour
         }
     }
 
-    async void LoadBlushAsync(int index, Image holder)
+    async void LoadBlushAsync(int index, Image holder, AsyncOperationHandle handle)
     {
-        if (blushHandle.IsValid())
+        if (handle.IsValid())
         {
-            Addressables.Release(blushHandle);
+            Addressables.Release(handle);
             Debug.Log("Handle released");
         }
 
-        blushHandle = Addressables.LoadAssetAsync<Sprite>(blushFolder + blushImages[index]);
-        Sprite blushSprite = (Sprite)await blushHandle.Task;
+        handle = Addressables.LoadAssetAsync<Sprite>(blushFolder + blushImages[index]);
+        Sprite blushSprite = (Sprite)await handle.Task;
         if (blushSprite != null)
         {
             holder.sprite = blushSprite;

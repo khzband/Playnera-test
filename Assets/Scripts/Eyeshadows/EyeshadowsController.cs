@@ -18,7 +18,8 @@ public class EyeshadowsController : MonoBehaviour
     float animationTime = 1.5f;
     float removeTime = 0.5f;
 
-    private AsyncOperationHandle eyeshadowsHandle;
+    private AsyncOperationHandle eyeshadowsHandle1;
+    private AsyncOperationHandle eyeshadowsHandle2;
 
     private string eyeshadowsFolder = "Eyeshadows/";
     private List<string> eyeshadowsImages = new List<string>()
@@ -55,11 +56,11 @@ public class EyeshadowsController : MonoBehaviour
         {
             if (activeHolder == 1)
             {
-                LoadEyeshadowsAsync(color - 1, eyeshadowsHolder1);
+                LoadEyeshadowsAsync(color - 1, eyeshadowsHolder1, eyeshadowsHandle1);
             }
             else
             {
-                LoadEyeshadowsAsync(color - 1, eyeshadowsHolder2);
+                LoadEyeshadowsAsync(color - 1, eyeshadowsHolder2, eyeshadowsHandle2);
             }
 
         }
@@ -78,16 +79,16 @@ public class EyeshadowsController : MonoBehaviour
     }
 
 
-    async void LoadEyeshadowsAsync(int index, Image holder)
+    async void LoadEyeshadowsAsync(int index, Image holder, AsyncOperationHandle handle)
     {
-        if (eyeshadowsHandle.IsValid())
+        if (handle.IsValid())
         {
-            Addressables.Release(eyeshadowsHandle);
+            Addressables.Release(handle);
             Debug.Log("Handle released");
         }
 
-        eyeshadowsHandle = Addressables.LoadAssetAsync<Sprite>(eyeshadowsFolder + eyeshadowsImages[index]);
-        Sprite eyeshadowsSprite = (Sprite)await eyeshadowsHandle.Task;
+        handle = Addressables.LoadAssetAsync<Sprite>(eyeshadowsFolder + eyeshadowsImages[index]);
+        Sprite eyeshadowsSprite = (Sprite)await handle.Task;
         if (eyeshadowsSprite != null)
         {
             holder.sprite = eyeshadowsSprite;

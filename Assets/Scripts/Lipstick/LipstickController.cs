@@ -18,7 +18,8 @@ public class LipstickController : MonoBehaviour
     float animationTime = 1.5f;
     float removeTime = 0.5f;
 
-    private AsyncOperationHandle lipstickHandle;
+    private AsyncOperationHandle lipstickHandle1;
+    private AsyncOperationHandle lipstickHandle2;
 
     private string lipstickFolder = "Lipstick/";
     private List<string> lipstickImages = new List<string>()
@@ -53,11 +54,11 @@ public class LipstickController : MonoBehaviour
         {
             if (activeHolder == 1)
             {
-                LoadLipstickAsync(color - 1, lipstickHolder1);
+                LoadLipstickAsync(color - 1, lipstickHolder1, lipstickHandle1);
             }
             else
             {
-                LoadLipstickAsync(color - 1, lipstickHolder2);
+                LoadLipstickAsync(color - 1, lipstickHolder2, lipstickHandle2);
             }
 
         }
@@ -75,16 +76,16 @@ public class LipstickController : MonoBehaviour
         }
     }
 
-    async void LoadLipstickAsync(int index, Image holder)
+    async void LoadLipstickAsync(int index, Image holder, AsyncOperationHandle handle)
     {
-        if (lipstickHandle.IsValid())
+        if (handle.IsValid())
         {
-            Addressables.Release(lipstickHandle);
+            Addressables.Release(handle);
             Debug.Log("Handle released");
         }
 
-        lipstickHandle = Addressables.LoadAssetAsync<Sprite>(lipstickFolder + lipstickImages[index]);
-        Sprite lipstickSprite = (Sprite)await lipstickHandle.Task;
+        handle = Addressables.LoadAssetAsync<Sprite>(lipstickFolder + lipstickImages[index]);
+        Sprite lipstickSprite = (Sprite)await handle.Task;
         if (lipstickSprite != null)
         {
             holder.sprite = lipstickSprite;
