@@ -9,11 +9,11 @@ public class Utils
     /// </summary>
     public static IEnumerator MoveRoutine(RectTransform objectToMove, Vector3 targetPos, float speed)
     {
-        //float cappedDeltaTime = Mathf.Min(Time.deltaTime, 0.03f);
+        float cappedDeltaTime = Mathf.Min(Time.deltaTime, 0.03f);
         while (Vector3.Distance(objectToMove.position, targetPos) > 0.01f)
         {
             // Перемещаем объект к цели на фиксированный шаг
-            objectToMove.position = Vector3.MoveTowards(objectToMove.position, targetPos, speed * Time.deltaTime);
+            objectToMove.position = Vector3.MoveTowards(objectToMove.position, targetPos, speed * cappedDeltaTime);
             yield return null;
         }
 
@@ -45,6 +45,30 @@ public class Utils
 
         // Финальная корректировка для точности
         objectToMove.position = targetPos;
+    }
+
+    /// <summary>
+    /// Рутина поворота объекта на заданный угол за заданное время
+    /// </summary>
+    public static IEnumerator RotateOverTimeRoutine(RectTransform rectTransform, Vector3 targetAngles, float duration)
+    {
+        Quaternion startRotation = rectTransform.localRotation;
+        Quaternion endRotation = Quaternion.Euler(targetAngles);
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float percent = elapsed / duration;
+
+            // Плавное вращение
+            rectTransform.localRotation = Quaternion.Lerp(startRotation, endRotation, percent);
+
+            yield return null;
+        }
+
+        // Фиксируем финальный угол во избежание погрешностей
+        rectTransform.localRotation = endRotation;
     }
 
     public static IEnumerator FadeInRoutine(float duration, Image holder)

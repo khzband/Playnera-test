@@ -17,30 +17,80 @@ public class EyebrushTip : MonoBehaviour
 
     private AsyncOperationHandle tipHandle;
 
-    private string folder = "Brush tips/";
+    private string folder = "Eyebrush tips/";
     private List<string> tipImages = new List<string>()
     {
-        "blush_tip_color_1.png",
-        "blush_tip_color_2.png",
-        "blush_tip_color_3.png",
-        "blush_tip_color_4.png",
-        "blush_tip_color_5.png",
-        "blush_tip_color_6.png",
-        "blush_tip_color_7.png",
-        "blush_tip_color_8.png",
-        "blush_tip_color_9.png"
+        "eyebrush_tip_color_1.png",
+        "eyebrush_tip_color_2.png",
+        "eyebrush_tip_color_3.png",
+        "eyebrush_tip_color_4.png",
+        "eyebrush_tip_color_5.png",
+        "eyebrush_tip_color_6.png",
+        "eyebrush_tip_color_7.png",
+        "eyebrush_tip_color_8.png",
+        "eyebrush_tip_color_9.png"
 
     };
 
 
     void Start()
     {
-        
+        eventBus = ServiceLocator.Instance.Get<EventBus>();
+        uiModel = ServiceLocator.Instance.Get<UIModel>();
+
+        tipImage = GetComponent<Image>();
+
+        eventBus.eyeshadowsColorSelected += OnEyeshadowsColorSelected;
+        eventBus.eyebrushTouchedColor += OnEyebrushTouchedColor;
+        eventBus.eyeshadowsAnimationStarted += OnEyeshadowsAnimationStarted;
+        eventBus.eyeshadowsColorReset += OnEyeshadowsColorReset;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEyeshadowsColorSelected()
     {
-        
+        LoadAsync(uiModel.color, tipImage);
+    }
+
+    private void OnEyebrushTouchedColor()
+    {
+        StartCoroutine(Utils.FadeInRoutine(takeColorTime, tipImage));
+    }
+
+    private void OnEyeshadowsAnimationStarted()
+    {
+        StartCoroutine(Utils.FadeOutRoutine(releaseColorTime, tipImage));
+    }
+
+    private void OnEyeshadowsColorReset()
+    {
+        StartCoroutine(Utils.FadeOutRoutine(resetColorTime, tipImage));
+    }
+
+    async void LoadAsync(int index, Image holder)
+    {
+        if (tipHandle.IsValid())
+        {
+            Addressables.Release(tipHandle);
+            Debug.Log("Handle released");
+        }
+
+        tipHandle = Addressables.LoadAssetAsync<Sprite>(folder + tipImages[index - 1]);
+        Sprite eyeshadowsSprite = (Sprite)await tipHandle.Task;
+        if (eyeshadowsSprite != null)
+        {
+            holder.sprite = eyeshadowsSprite;
+        }
+        else
+        {
+            Debug.Log("Failed to load sprite");
+        }
+    }
+
+    void OnDestroy()
+    {
+        eventBus.eyeshadowsColorSelected -= OnEyeshadowsColorSelected;
+        eventBus.eyebrushTouchedColor -= OnEyebrushTouchedColor;
+        eventBus.eyeshadowsAnimationStarted -= OnEyeshadowsAnimationStarted;
+        eventBus.eyeshadowsColorReset -= OnEyeshadowsColorReset;
     }
 }

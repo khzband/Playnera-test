@@ -19,7 +19,7 @@ public class Cream : MonoBehaviour, IInstrument
 
     private RectTransform rectTransform; // RectTransform кисти
 
-    private float speed = 700f;
+    private float speed = 900f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +48,7 @@ public class Cream : MonoBehaviour, IInstrument
     {
         creamImage.enabled = true;
         shelfImage.enabled = false;
+
         // Перемещение в зону готовности
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, readyZone.position, speed));
 

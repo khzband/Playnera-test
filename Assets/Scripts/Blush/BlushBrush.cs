@@ -17,7 +17,9 @@ public class BlushBrush : MonoBehaviour, IInstrument
 
     private RectTransform rectTransform; // RectTransform кисти
 
-    private float speed = 700f;
+    private float speed = 900f;
+    private Vector3 rotateAngles = new Vector3(0, 0, 10);
+    private float rotateDuration = 0.2f;
 
     void Start()
     {
@@ -44,7 +46,10 @@ public class BlushBrush : MonoBehaviour, IInstrument
     {
         Vector3 offset = new Vector3(50, 0, 0);
         float moveTime = 0.2f;
-        
+
+        // Поворачиваем
+        yield return StartCoroutine(Utils.RotateOverTimeRoutine(rectTransform, rotateAngles, rotateDuration));
+
         // Перемещаем к цвету
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, blushCells[color - 1].GetComponent<RectTransform>().position, speed));
 
@@ -81,6 +86,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
         Vector3 offsetR = new Vector3(100, 0, 0);
         float moveTime = 0.3f;
 
+        
         // Перемещаем к начальной точке
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, blushZone.position + offsetL, speed));
 
@@ -97,50 +103,11 @@ public class BlushBrush : MonoBehaviour, IInstrument
         // Возвращаем кисть на место
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone, speed));
 
+        // Поворачиваем в начальное положение
+        yield return StartCoroutine(Utils.RotateOverTimeRoutine(rectTransform, Vector3.zero, rotateDuration));
+
         presenter.OnCycleCompleted();
     }
 
-    /*
-    /// <summary>
-    /// Рутина перемещения объекта в заданную точку
-    /// </summary>
-    IEnumerator MoveRoutine(RectTransform objectToMove, Vector3 targetPos, float speed)
-    {
-        //float cappedDeltaTime = Mathf.Min(Time.deltaTime, 0.03f);
-        while (Vector3.Distance(objectToMove.position, targetPos) > 0.01f)
-        {
-            // Перемещаем объект к цели на фиксированный шаг
-            objectToMove.position = Vector3.MoveTowards(objectToMove.position, targetPos, speed * Time.deltaTime);
-            yield return null;
-        }
-
-        // В конце принудительно ставим в точную позицию цели
-        objectToMove.position = targetPos;
-    }
-
-    IEnumerator MoveByTimeRoutine(RectTransform objectToMove, Vector3 targetPos, float time)
-    {
-        Vector3 startPos = objectToMove.position;
-        float elapsedTime = 0f;
-
-        while (elapsedTime < time)
-        {
-            elapsedTime += Time.deltaTime;
-
-            // Вычисляем коэффициент прогресса (от 0 до 1)
-            float t = elapsedTime / time;
-
-            // Линейно интерполируем позицию
-            // Обновляем targetObject.position в цикле на случай, если цель движется
-            objectToMove.position = Vector3.Lerp(startPos, targetPos, t);
-
-            yield return null; // Ждем следующий кадр
-        }
-
-        // Финальная корректировка для точности
-        objectToMove.position = targetPos;
-    }
-    */
-
-
+    
 }

@@ -16,7 +16,9 @@ public class Eyebrush : MonoBehaviour, IInstrument
 
     private RectTransform rectTransform; // RectTransform кисти
 
-    private float speed = 700f;
+    private float speed = 900f;
+    private Vector3 rotateAngles = new Vector3(0, 0, 10);
+    private float rotateDuration = 0.2f;
 
 
     void Start()
@@ -44,6 +46,9 @@ public class Eyebrush : MonoBehaviour, IInstrument
     {
         Vector3 offset = new Vector3(50, 0, 0);
         float moveTime = 0.2f;
+
+        // Поворачиваем
+        yield return StartCoroutine(Utils.RotateOverTimeRoutine(rectTransform, rotateAngles, rotateDuration));
 
         // Перемещаем к цвету
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, eyeshadowsCells[color - 1].GetComponent<RectTransform>().position, speed));
@@ -96,6 +101,9 @@ public class Eyebrush : MonoBehaviour, IInstrument
 
         // Возвращаем кисть на место
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone, speed));
+
+        // Поворачиваем в начальное положение
+        yield return StartCoroutine(Utils.RotateOverTimeRoutine(rectTransform, Vector3.zero, rotateDuration));
 
         presenter.OnCycleCompleted();
     }

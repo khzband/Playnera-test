@@ -66,6 +66,11 @@ public class InstrumentController : MonoBehaviour, IService
                 
             case 3:
                 instrumentObj = eyeshadowsInstrument;
+                eventBus.eyeshadowsColorSelected?.Invoke();
+                if (uiModel.quickColorReset)
+                {
+                    eventBus.eyeshadowsColorReset?.Invoke();
+                }
                 break;
                 
             case 4:

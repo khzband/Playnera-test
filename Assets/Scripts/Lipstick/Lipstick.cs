@@ -16,7 +16,10 @@ public class Lipstick : MonoBehaviour, IInstrument
 
     public int id;
 
-    private float speed = 700f;
+    private float speed = 900f;
+    private Vector3 rotateAngles = new Vector3(0, 0, 10);
+    private float rotateDuration = 0.2f;
+
     private RectTransform rectTransform; // RectTransform помады
 
     void Start()
@@ -42,6 +45,9 @@ public class Lipstick : MonoBehaviour, IInstrument
 
     IEnumerator GetReadySequence()
     {
+        // Поворачиваем
+        yield return StartCoroutine(Utils.RotateOverTimeRoutine(rectTransform, rotateAngles, rotateDuration));
+
         // Перемещение в зону готовности
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, readyZone.position, speed));
 
@@ -76,6 +82,9 @@ public class Lipstick : MonoBehaviour, IInstrument
 
         // Возвращаем кисть на место
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone, speed));
+
+        // Поворачиваем в начальное положение
+        yield return StartCoroutine(Utils.RotateOverTimeRoutine(rectTransform, Vector3.zero, rotateDuration));
 
         bookImage.enabled = true;
         lipstickImage.enabled = false;
