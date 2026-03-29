@@ -12,7 +12,7 @@ public class EyebrushTip : MonoBehaviour
     private Image tipImage;
 
     float takeColorTime = 1.0f;
-    float releaseColorTime = 1.5f;
+    //float releaseColorTime = 1.5f;
     float resetColorTime = 0.2f;
 
     private AsyncOperationHandle tipHandle;
@@ -42,7 +42,7 @@ public class EyebrushTip : MonoBehaviour
 
         eventBus.eyeshadowsColorSelected += OnEyeshadowsColorSelected;
         eventBus.eyebrushTouchedColor += OnEyebrushTouchedColor;
-        eventBus.eyeshadowsAnimationStarted += OnEyeshadowsAnimationStarted;
+        //eventBus.eyeshadowsAnimationStarted += OnEyeshadowsAnimationStarted;
         eventBus.eyeshadowsColorReset += OnEyeshadowsColorReset;
     }
 
@@ -56,10 +56,12 @@ public class EyebrushTip : MonoBehaviour
         StartCoroutine(Utils.FadeInRoutine(takeColorTime, tipImage));
     }
 
+    /*
     private void OnEyeshadowsAnimationStarted()
     {
         StartCoroutine(Utils.FadeOutRoutine(releaseColorTime, tipImage));
     }
+    */
 
     private void OnEyeshadowsColorReset()
     {
@@ -88,9 +90,10 @@ public class EyebrushTip : MonoBehaviour
 
     void OnDestroy()
     {
+        Debug.Log("OnDestroy invoked");
         eventBus.eyeshadowsColorSelected -= OnEyeshadowsColorSelected;
         eventBus.eyebrushTouchedColor -= OnEyebrushTouchedColor;
-        eventBus.eyeshadowsAnimationStarted -= OnEyeshadowsAnimationStarted;
+        //eventBus.eyeshadowsAnimationStarted -= OnEyeshadowsAnimationStarted;
         eventBus.eyeshadowsColorReset -= OnEyeshadowsColorReset;
     }
 }

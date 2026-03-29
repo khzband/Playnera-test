@@ -12,7 +12,7 @@ public class BrushTip : MonoBehaviour
     private Image tipImage;
 
     float takeColorTime = 1.0f;
-    float releaseColorTime = 1.5f;
+    //float releaseColorTime = 1.5f;
     float resetColorTime = 0.2f;
 
     private AsyncOperationHandle tipHandle;
@@ -41,7 +41,7 @@ public class BrushTip : MonoBehaviour
 
         eventBus.blushColorSelected += OnBlushColorSelected;
         eventBus.brushTouchedColor += OnBrushTouchedColor;
-        eventBus.blushAnimationStarted += OnBlushAnimationStarted;
+        //eventBus.blushAnimationStarted += OnBlushAnimationStarted;
         eventBus.blushColorReset += OnBlushColorReset;
     }
 
@@ -55,10 +55,12 @@ public class BrushTip : MonoBehaviour
         StartCoroutine(Utils.FadeInRoutine(takeColorTime, tipImage));
     }
 
+    /*
     private void OnBlushAnimationStarted()
     {
         StartCoroutine(Utils.FadeOutRoutine(releaseColorTime, tipImage));
     }
+    */
 
     private void OnBlushColorReset()
     {
@@ -89,7 +91,7 @@ public class BrushTip : MonoBehaviour
     {
         eventBus.blushColorSelected -= OnBlushColorSelected;
         eventBus.brushTouchedColor -= OnBrushTouchedColor;
-        eventBus.blushAnimationStarted -= OnBlushAnimationStarted;
+        //eventBus.blushAnimationStarted -= OnBlushAnimationStarted;
         eventBus.blushColorReset -= OnBlushColorReset;
     }
 }

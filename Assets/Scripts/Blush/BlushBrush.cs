@@ -103,8 +103,12 @@ public class BlushBrush : MonoBehaviour, IInstrument
         // Возвращаем кисть на место
         yield return StartCoroutine(Utils.MoveRoutine(rectTransform, startZone, speed));
 
+        eventBus.blushColorReset?.Invoke();
+
         // Поворачиваем в начальное положение
         yield return StartCoroutine(Utils.RotateOverTimeRoutine(rectTransform, Vector3.zero, rotateDuration));
+
+
 
         presenter.OnCycleCompleted();
     }
