@@ -4,15 +4,15 @@ public class UIModel : IService
 {
     EventBus eventBus;
     
-    public int page;
-    public int mode;
-    public int color;
-    public int instrument; // Номер интсрумента в соостветсвующем списке InstrumentController
-    public int stage; // 0 - начальный режим, 1 - фаза GetReady
+    public int page {  get; private set; }
+    public int mode { get; private set; }
+    public int color { get; private set; }
+    public int instrument { get; private set; } // Номер интсрумента в соостветсвующем списке InstrumentController
+    public int stage { get; private set; } // 0 - начальный режим, 1 - фаза GetReady
 
-    public bool inputBlocked;
-    public bool instrumentBlocked;
-    public bool quickColorReset;
+    public bool inputBlocked { get; private set; }
+    public bool instrumentBlocked {  get; private set; }
+    public bool quickColorReset { get; private set; }
 
     public void Init()
     {
@@ -42,6 +42,11 @@ public class UIModel : IService
     public void SetColor(int newColor)
     {
         color = newColor;
+    }
+
+    public void SetQuickColorReset(bool value)
+    {
+        quickColorReset = value;
     }
 
     public void SetStage(int newStage)

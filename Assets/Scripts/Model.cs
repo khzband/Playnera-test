@@ -5,13 +5,13 @@ public class Model : IService
 {
     EventBus eventBus;
     
-    public bool acne;
-    public bool acneAlreadyRemoved;
-    public int blushColor;
-    public int lipstickColor;
-    public int eyeshadowsColor;
+    public bool acne { get; private set; }
+    public bool acneAlreadyRemoved { get; private set; }
+    public int blushColor {  get; private set; }
+    public int lipstickColor { get; private set; }
+    public int eyeshadowsColor { get; private set; }
 
-    
+
     public void Init()
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();
@@ -48,6 +48,11 @@ public class Model : IService
     {
         acne = value;
         eventBus.acneSet?.Invoke();// InstrumentController запускает анимацию нанесения
+    }
+
+    public void SetAcneAlreadyRemoved(bool value)
+    {
+        acneAlreadyRemoved = value;
     }
 
     public void RemoveBlush()

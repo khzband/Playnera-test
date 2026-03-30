@@ -36,7 +36,8 @@ public class Presenter : IService
         // Проверка на смену цвета в фазе GetReady
         if(uiModel.stage == 1)
         {
-            uiModel.quickColorReset = true;
+            //uiModel.quickColorReset = true;
+            uiModel.SetQuickColorReset(true);
         }
 
         // Устанавливаем режим
@@ -108,7 +109,8 @@ public class Presenter : IService
 
     public void OnAcneRemoved()
     {
-        model.acneAlreadyRemoved = true;
+        model.SetAcneAlreadyRemoved(true);
+        //model.acneAlreadyRemoved = true;
     }
 
     public void OnSpongeClicked()
@@ -131,7 +133,8 @@ public class Presenter : IService
         if (!model.acne)
         {
             model.RemoveCream();
-            model.acneAlreadyRemoved = false;
+            model.SetAcneAlreadyRemoved(false);
+            //model.acneAlreadyRemoved = false;
         }
     }
 
@@ -139,7 +142,8 @@ public class Presenter : IService
     public void OnCycleCompleted()
     {
         uiModel.SetStage(0);
-        uiModel.quickColorReset = false;
+        uiModel.SetQuickColorReset(false);
+        //uiModel.quickColorReset = false;
         Debug.Log("Initial phase");
     }
 
