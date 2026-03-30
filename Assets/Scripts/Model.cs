@@ -11,15 +11,7 @@ public class Model : IService
     public int lipstickColor;
     public int eyeshadowsColor;
 
-    Dictionary<string, int> modelState = new Dictionary<string, int>()
-    {
-        {"powder", 0 },
-        {"blush", 0 },
-        {"lipstick", 0 },
-        {"eyeshadows", 0 },
-        {"acne", 1 }
-    };
-
+    
     public void Init()
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();

@@ -9,7 +9,7 @@ public class EventBus : IService
 
     // Blush
     public Action blushColorSelected; // Сигнал для загрузки окрашенного кончика кисти
-    public Action blushColorReset; // Быстрое освобождение от предыдущего цвета
+    public Action blushColorReset; // Освобождение от предыдущего цвета
     public Action blushColorSet;
     public Action brushTouchedColor;
     public Action blushAnimationStarted;
@@ -20,7 +20,7 @@ public class EventBus : IService
 
     // Eyebrush
     public Action eyeshadowsColorSelected; // Сигнал для загрузки окрашенного кончика кисти
-    public Action eyeshadowsColorReset; // Быстрое освобождение от предыдущего цвета
+    public Action eyeshadowsColorReset; // Освобождение от предыдущего цвета
     public Action eyeshadowsColorSet;
     public Action eyebrushTouchedColor;
     public Action eyeshadowsAnimationStarted;
