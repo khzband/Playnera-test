@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Eyebrush : MonoBehaviour, IInstrument
+public class Eyebrush : Instrument
 {
     EventBus eventBus;
     UIModel uiModel;
@@ -33,7 +33,7 @@ public class Eyebrush : MonoBehaviour, IInstrument
     }
 
     // Вызов начальной анимации, поступает с InstrumentController
-    public void GetReady()
+    public override void GetReady()
     {
         StartCoroutine(GetReadySequence(uiModel.color));
     }
@@ -72,7 +72,7 @@ public class Eyebrush : MonoBehaviour, IInstrument
     }
 
     // Вызов анимации нанесения, поступает с InstrumentController
-    public void ApplyInstrument()
+    public override void ApplyInstrument()
     {
         StartCoroutine(ApplyEyeshadowsSequence());
     }

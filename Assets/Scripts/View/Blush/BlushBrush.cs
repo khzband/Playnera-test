@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlushBrush : MonoBehaviour, IInstrument
+public class BlushBrush : Instrument
 {
     EventBus eventBus;
     UIModel uiModel;
@@ -13,7 +13,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
     public RectTransform readyZone;
     public RectTransform blushZone;
 
-    Vector3 startZone;
+    private Vector3 startZone;
 
     private RectTransform rectTransform; // RectTransform кисти
 
@@ -33,7 +33,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
     }
 
     // Вызов начальной анимации, поступает с InstrumentController
-    public void GetReady()
+    public override void GetReady()
     {
         StartCoroutine(GetReadySequence(uiModel.color));
     }
@@ -72,7 +72,7 @@ public class BlushBrush : MonoBehaviour, IInstrument
     }
 
     // Вызов анимации нанесения, поступает с InstrumentController
-    public void ApplyInstrument()
+    public override void ApplyInstrument()
     {
         StartCoroutine(ApplyBlushSequence());
     }

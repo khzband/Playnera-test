@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Lipstick : MonoBehaviour, IInstrument
+public class Lipstick : Instrument
 {
     EventBus eventBus;
     Presenter presenter;
@@ -34,7 +34,7 @@ public class Lipstick : MonoBehaviour, IInstrument
     }
 
     // Вызов начальной анимации, поступает с InstrumentController
-    public void GetReady()
+    public override void GetReady()
     {
         lipstickImage.enabled = true;
         bookImage.enabled = false;
@@ -55,7 +55,7 @@ public class Lipstick : MonoBehaviour, IInstrument
     }
 
     // Вызов анимации нанесения, поступает с InstrumentController
-    public void ApplyInstrument()
+    public override void ApplyInstrument()
     {
         StartCoroutine(ApplyLipstickSequence());
         

@@ -25,7 +25,7 @@ public class InstrumentController : MonoBehaviour, IService
     */
 
     private GameObject instrumentObj;
-    private IInstrument currentInstrument;
+    private Instrument currentInstrument;
 
     public void Init()
     {
@@ -80,14 +80,16 @@ public class InstrumentController : MonoBehaviour, IService
 
         }
 
-        currentInstrument = instrumentObj.GetComponent<IInstrument>();
+        currentInstrument = instrumentObj.GetComponent<Instrument>();
         currentInstrument.GetReady();
     }
+
 
     private void OnInstrumentUsed()
     {
         currentInstrument.ApplyInstrument();
     }
+
 
     private void OnDestroy()
     {

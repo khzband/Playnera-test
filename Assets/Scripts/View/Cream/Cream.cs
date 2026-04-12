@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Cream : MonoBehaviour, IInstrument
+public class Cream : Instrument
 {
     EventBus eventBus;
     UIModel uiModel;
@@ -36,7 +36,7 @@ public class Cream : MonoBehaviour, IInstrument
     }
 
     // Вызов начальной анимации, поступает с InstrumentController
-    public void GetReady()
+    public override void GetReady()
     {
         StartCoroutine(GetReadySequence());
     }
@@ -56,7 +56,7 @@ public class Cream : MonoBehaviour, IInstrument
     }
 
     // Вызов анимации нанесения, поступает с InstrumentController
-    public void ApplyInstrument()
+    public override void ApplyInstrument()
     {
         StartCoroutine(ApplyCreamSequence());
     }
