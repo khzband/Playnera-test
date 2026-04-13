@@ -4,78 +4,96 @@ using UnityEngine;
 public class Model : IService
 {
     EventBus eventBus;
-    
-    public bool acne { get; private set; }
-    public bool acneAlreadyRemoved { get; private set; }
-    public int blushColor {  get; private set; }
-    public int lipstickColor { get; private set; }
-    public int eyeshadowsColor { get; private set; }
+
+    private bool _acne;
+    private bool _acneAlreadyRemoved;
+    private int _blushColor;
+    private int _lipstickColor;
+    private int _eyeshadowsColor;
+
+    public bool acne => _acne;
+    public bool acneAlreadyRemoved => _acneAlreadyRemoved;
+    public int blushColor => _blushColor;
+    public int lipstickColor => _lipstickColor;
+    public int eyeshadowsColor => _eyeshadowsColor;
 
 
     public void Init()
     {
         eventBus = ServiceLocator.Instance.Get<EventBus>();
-        
-        acne = true;
-        acneAlreadyRemoved = false;
-        blushColor = 0;
-        lipstickColor = 0;
-        eyeshadowsColor = 0;
+
+        _acne = true;
+        _acneAlreadyRemoved = false;
+        _blushColor = 0;
+        _lipstickColor = 0;
+        _eyeshadowsColor = 0;
     }
 
     public void SetBlushColor(int newColor)
     {
-        blushColor = newColor;
+        if (newColor >= 0 && newColor < 10)
+        {
+            _blushColor = newColor;
+        }
+
         eventBus.blushColorSet?.Invoke(); // BlushController начинает загружать спрайты, InstrumentController запускает анимацию нанесения
         Debug.Log($"New blush color = {newColor}");
     }
 
     public void SetLipstickColor(int newColor)
     {
-        lipstickColor = newColor;
+        if (newColor >= 0 && newColor < 7)
+        {
+            _lipstickColor = newColor;
+        }
+
         eventBus.lipstickColorSet?.Invoke(); // LipstickController начинает загружать спрайты, InstrumentController запускает анимацию нанесения
         Debug.Log($"New lipstick color = {newColor}");
     }
 
     public void SetEyeshadowsColor(int newColor)
     {
-        eyeshadowsColor = newColor;
+        if (newColor >= 0 && newColor < 10)
+        {
+            _eyeshadowsColor = newColor;
+        }
+
         eventBus.eyeshadowsColorSet?.Invoke(); // EyeshadowsController начинает загружать спрайты, InstrumentController запускает анимацию нанесения
         Debug.Log($"New eyeshadows color = {newColor}");
     }
 
     public void SetAcne(bool value)
     {
-        acne = value;
+        _acne = value;
         eventBus.acneSet?.Invoke();// InstrumentController запускает анимацию нанесения
     }
 
     public void SetAcneAlreadyRemoved(bool value)
     {
-        acneAlreadyRemoved = value;
+        _acneAlreadyRemoved = value;
     }
 
     public void RemoveBlush()
     {
-        blushColor = 0;
+        _blushColor = 0;
         eventBus.blushRemoved?.Invoke();
     }
 
     public void RemoveLipstick()
     {
-        lipstickColor = 0;
+        _lipstickColor = 0;
         eventBus.lipstickRemoved?.Invoke();
     }
 
     public void RemoveEyeshadows()
     {
-        eyeshadowsColor = 0;
+        _eyeshadowsColor = 0;
         eventBus.eyeshadowsRemoved?.Invoke();
     }
 
     public void RemoveCream()
     {
-        acne = true;
+        _acne = true;
         eventBus.creamRemoved?.Invoke();
     }
 
